@@ -1,4 +1,4 @@
-package com.amm.nosql.dao.mongodb;
+package com.amm.nosql.util.mongodb;
 
 import java.io.*;
 import java.util.*;
@@ -9,7 +9,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.ReadPreference;
 
 /**
- * Spring config-friendly factory to create Mongo DBCollection
+ * Spring config-friendly way to create Mongo DBCollection
  */
 public class MongoConnection {
 	private static final Logger logger = Logger.getLogger(MongoConnection.class);

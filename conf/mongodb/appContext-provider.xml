@@ -29,7 +29,7 @@
 
 <!-- Mongo Connection  -->
 
-  <bean id="mongoConnection" class="com.amm.nosql.dao.mongodb.MongoConnection" scope="prototype" >
+  <bean id="mongoConnection" class="com.amm.nosql.util.mongodb.MongoConnection" scope="prototype" >
      <constructor-arg ref="${mongodb.mongo}" />
      <constructor-arg value="${mongodb.database}" />
      <constructor-arg value="${mongodb.collection.keyValue}" />
