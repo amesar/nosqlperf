@@ -11,12 +11,12 @@ import com.mongodb.ReadPreference;
 /**
  * Spring config-friendly factory to create Mongo DBCollection
  */
-public class MongoCollectionFactory {
-	private static final Logger logger = Logger.getLogger(MongoCollectionFactory.class);
+public class MongoConnection {
+	private static final Logger logger = Logger.getLogger(MongoConnection.class);
 	private final String databaseName ;
 	private final String collectionName ;
 
-	public MongoCollectionFactory(Mongo mongo, String databaseName, String collectionName) {
+	public MongoConnection(Mongo mongo, String databaseName, String collectionName) {
 		this.mongo = mongo ;
 		this.databaseName = databaseName ;
 		this.collectionName = collectionName ;
