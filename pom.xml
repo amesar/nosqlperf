@@ -196,7 +196,7 @@
             <artifactId>rdl-jar</artifactId>
             <version>0.0.7</version>
             <scope>system</scope>
-            <systemPath>${basedir}/lib3/vtest.jar</systemPath>
+            <systemPath>${basedir}/lib2/vtest.jar</systemPath>
         </dependency>
 
 	</dependencies>
