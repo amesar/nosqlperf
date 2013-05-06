@@ -57,8 +57,6 @@
                 </execution>
               </executions>
             </plugin>
-<!--
--->
 
 		<plugin>
 			<groupId>org.apache.maven.plugins</groupId>
@@ -184,17 +182,10 @@
 
         <!-- vtest -->
 
-<!--
-        <dependency>
-            <groupId>com.vtest</groupId>
-            <artifactId>vtest</artifactId>
-            <version>1.0.0</version>
-        </dependency>
--->
         <dependency>
             <groupId>com.paypal.demandgen.ppmn</groupId>
             <artifactId>rdl-jar</artifactId>
-            <version>0.0.7</version>
+            <version>1.0.0</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib2/vtest.jar</systemPath>
         </dependency>
