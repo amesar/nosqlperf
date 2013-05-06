@@ -13,7 +13,7 @@
 <!-- DAO -->
 
   <bean id="keyValueDao" class="com.amm.nosql.dao.mongodb.MongodbKeyValueDao">
-    <constructor-arg ref="keyValue.collectionFactory" />
+    <constructor-arg value="#{mongoConnection.getCollection()}" />
     <constructor-arg ref="mongo.keyValueMapper" />
     <property name="writeConcern" ref="writeConcern"  />
   </bean>
@@ -25,17 +25,11 @@
      <constructor-arg value="${mongodb.writeConcern.j}" />
   </bean>
 
-<!-- MongoDB Object Mappers  -->
-
   <bean id="mongo.keyValueMapper" class="com.amm.nosql.dao.mongodb.KeyValueMapper" />
 
-<!-- Mongo Collection Factory  -->
+<!-- Mongo Connection  -->
 
-  <bean id="keyValue.collectionFactory" lazy-init="false"
-      factory-bean="keyValue.collectionFactory2"
-      factory-method="getCollection"/>
-
-  <bean id="keyValue.collectionFactory2" class="com.amm.nosql.dao.mongodb.MongoCollectionFactory" scope="prototype" >
+  <bean id="mongoConnection" class="com.amm.nosql.dao.mongodb.MongoConnection" scope="prototype" >
      <constructor-arg ref="${mongodb.mongo}" />
      <constructor-arg value="${mongodb.database}" />
      <constructor-arg value="${mongodb.collection.keyValue}" />
@@ -69,6 +63,7 @@
 
 <!-- mongo client - 3 server replica set on one machine -->
 
+<!--
   <bean id="mongo.replica.local" class="com.mongodb.Mongo" scope="prototype" lazy-init="true" >
      <constructor-arg ref="replicaSet.local" />
   </bean>
@@ -87,5 +82,6 @@
        <constructor-arg value="${mongodb.port3}" />
      </bean>
   </util:list>
+-->
 
 </beans>
