@@ -169,6 +169,13 @@
             <scope>system</scope>
             <systemPath>${basedir}/lib2/citrusleaf/citrusleaf.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>oracle.kv</groupId>
+            <artifactId>oracle</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib2/oracle/kvclient-1.2.123.jar</systemPath>
+        </dependency>
 
         <dependency>
             <groupId>com.beust</groupId>
