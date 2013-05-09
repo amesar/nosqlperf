@@ -188,8 +188,8 @@
         <!-- vtest -->
 
         <dependency>
-            <groupId>com.paypal.demandgen.ppmn</groupId>
-            <artifactId>rdl-jar</artifactId>
+            <groupId>com.amm.vtest</groupId>
+            <artifactId>vtest</artifactId>
             <version>1.0.0</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib2/vtest.jar</systemPath>
