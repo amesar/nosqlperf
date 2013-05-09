@@ -6,18 +6,18 @@ import java.net.InetSocketAddress;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
-import com.amm.nosql.data.NoSqlEntity;
-import com.amm.nosql.dao.NoSqlDao;
-import com.amm.mapper.ObjectMapper;
 import net.spy.memcached.MemcachedClient;
-import net.spy.memcached.KetamaConnectionFactory;
+//import net.spy.memcached.KetamaConnectionFactory;
 import net.spy.memcached.ConnectionFactoryBuilder;
 import net.spy.memcached.ConnectionFactory;
 import net.spy.memcached.AddrUtil;
+import com.amm.nosql.data.NoSqlEntity;
+import com.amm.nosql.dao.NoSqlDao;
+import com.amm.mapper.ObjectMapper;
 
 /**
  * Memcached implementation - can be used either for memcached or membase.
- * @author amesarovic
+ * @author andre
  */
 public class MemcachedDao<T extends NoSqlEntity> implements NoSqlDao<T> {
 	private static final Logger logger = Logger.getLogger(MemcachedDao.class);
@@ -65,22 +65,11 @@ public class MemcachedDao<T extends NoSqlEntity> implements NoSqlDao<T> {
 		ConnectionFactory connectionFactory = connectionFactoryBuilder.build();
 		List<InetSocketAddress> addresses = Arrays.asList(new InetSocketAddress(hostname, port));
 		client = new MemcachedClient(connectionFactory, addresses);
-
-/*
-		KetamaConnectionFactory kf = new KetamaConnectionFactory();
-		List<InetSocketAddress> addresses = Arrays.asList(new InetSocketAddress(hostname, port));
-		client = new MemcachedClient(kf,addresses);
-		//client = new MemcachedClient(kf,new InetSocketAddress(hostname, port));
-		//kf.setOperationTimeout(11);
-		logger.debug("OperationTimeout="+kf.getOperationTimeout());
-*/
 	}
 
 	@SuppressWarnings("unchecked") 
 	public T get(String id) throws Exception {
-		//byte [] value = (byte[])client.get(id);
 		Object obj = client.get(id);
-		//System.out.println(">> obj.class="+obj.getClass().getName());
 		byte [] value ;
 		if (obj instanceof String) // for NDB MySQL cluster
 			value = ((String)obj).getBytes();
@@ -99,6 +88,7 @@ public class MemcachedDao<T extends NoSqlEntity> implements NoSqlDao<T> {
 	}
 
 // If never call future.get, then value is never persisted!
+
 	public void put(T entity) throws Exception {
 		String key = getKey(entity);
 		final byte [] value = entityMapper.toBytes(entity);
@@ -126,7 +116,6 @@ public class MemcachedDao<T extends NoSqlEntity> implements NoSqlDao<T> {
     public void setTimeout(long timeout) {
 		this.timeout = timeout ;
 	}
-
 
 	@Override 
 	public String toString() {
