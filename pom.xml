@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.where</groupId>
-	<artifactId>nosqlperf</artifactId>
+    <artifactId>nosqlperf</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
-	<name>nosqlperf</name>
+    <packaging>jar</packaging>
+    <name>nosqlperf</name>
 
     <properties>
         <spring.version>3.2.2.RELEASE</spring.version>
@@ -28,19 +28,19 @@
         </repository>
     </repositories>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.4</version>
-				<configuration>
-					<includes>
-						<include>**/*</include>
-					</includes>
-				</configuration>
-			</plugin>
-			
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <includes>
+                        <include>**/*</include>
+                    </includes>
+                </configuration>
+            </plugin>
+            
             <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-assembly-plugin</artifactId>
@@ -58,42 +58,47 @@
               </executions>
             </plugin>
 
-		<plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-compiler-plugin</artifactId>
-            <version>2.3.2</version>
-			<configuration>
-				<source>1.6</source>
-				<target>1.6</target>
-			</configuration>
-		</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
 
-		</plugins>
-	</build>
-	
-	<dependencies>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-		</dependency>
+        </plugins>
+    </build>
+    
+    <dependencies>
+
+        <!-- Basic -->
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>2.3</version>
         </dependency>
+
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.4</version>
         </dependency>
 
-		<dependency>
-			<groupId>commons-httpclient</groupId>
-			<artifactId>commons-httpclient</artifactId>
-			<version>3.1</version>
-		</dependency>
-        
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.1</version>
+        </dependency>
+
         <!-- Spring -->
 
         <dependency>
@@ -123,7 +128,7 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- nosql -->
+        <!-- nosql jars -->
 
         <dependency>
             <groupId>couchbase</groupId>
@@ -158,24 +163,24 @@
         <!-- vtest runtime -->
 
         <dependency>
-	        <groupId>org.apache.commons</groupId>
-	        <artifactId>commons-math</artifactId>
-	        <version>2.0</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math</artifactId>
+            <version>2.0</version>
             <scope>runtime</scope>
         </dependency>
 
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.9</version>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.9</version>
             <scope>runtime</scope>
-		</dependency>
+        </dependency>
 
 <!--
         <dependency>
-	        <groupId>com.beust</groupId>
-	        <artifactId>jcommander</artifactId>
-	        <version>1.30</version>
+            <groupId>com.beust</groupId>
+            <artifactId>jcommander</artifactId>
+            <version>1.30</version>
             <scope>runtime</scope>
         </dependency>
 -->
@@ -190,6 +195,6 @@
             <systemPath>${basedir}/lib2/vtest.jar</systemPath>
         </dependency>
 
-	</dependencies>
+    </dependencies>
  
 </project>
