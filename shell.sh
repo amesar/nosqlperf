@@ -21,5 +21,5 @@ if [ $# -gt 0 ] ; then
 echo ">> hosts=$hosts"
 echo ">> PROPS=$PROPS"
 
-java $PROPS -cp $CPATH $PGM $* | tee log.txt
+java $PROPS -cp $CPATH $PGM $* | tee log-shell.txt
 

@@ -13,6 +13,7 @@
         <jackson.version>1.9.9</jackson.version>
         <couchbase.version>1.1.4</couchbase.version>
         <mongodb.version>2.10.1</mongodb.version>
+        <oracle.kv.version>1.2.123</oracle.kv.version>
         <artifact.version>0.1-SNAPSHOT</artifact.version>
     </properties>
 
@@ -99,6 +100,12 @@
             <version>3.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.beust</groupId>
+            <artifactId>jcommander</artifactId>
+            <version>1.30</version>
+        </dependency>
+
         <!-- Spring -->
 
         <dependency>
@@ -154,13 +161,13 @@
             <version>1.56.34</version>
         </dependency>
 
-<!--
         <dependency>
             <groupId>org.hectorclient</groupId>
-            <artifactId>hector</artifactId>
+            <artifactId>hector-core</artifactId>
             <version>1.1-3</version>
         </dependency>
--->
+
+        <!-- local nosql jars -->
 
         <dependency>
             <groupId>net.citrusleaf</groupId>
@@ -174,14 +181,32 @@
             <artifactId>oracle</artifactId>
             <version>1.0.0</version>
             <scope>system</scope>
-            <systemPath>${basedir}/lib2/oracle/kvclient-1.2.123.jar</systemPath>
+            <systemPath>${basedir}/lib2/oracle/kvclient-${oracle.kv.version}.jar</systemPath>
         </dependency>
 
+        <!-- TODO
         <dependency>
-            <groupId>com.beust</groupId>
-            <artifactId>jcommander</artifactId>
-            <version>1.30</version>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase</artifactId>
+            <version>0.95.0</version>
         </dependency>
+        -->
+
+        <dependency>
+            <groupId>org.apache.hadoop.hbase</groupId>
+            <artifactId>hbase</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib2/hbase/hbase-0.94.1.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hadoop.core</groupId>
+            <artifactId>hadoop-core</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib2/hbase/hadoop-core-1.0.3.jar</systemPath>
+        </dependency>
+
 
         <!-- vtest runtime -->
 

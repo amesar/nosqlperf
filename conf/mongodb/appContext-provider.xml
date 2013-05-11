@@ -63,7 +63,7 @@
 
 <!-- mongo client - 3 server replica set on one machine -->
 
-<!--
+<!-- no lazy init on list!
   <bean id="mongo.replica.local" class="com.mongodb.Mongo" scope="prototype" lazy-init="true" >
      <constructor-arg ref="replicaSet.local" />
   </bean>
