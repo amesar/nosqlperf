@@ -9,9 +9,9 @@
     <name>nosqlperf</name>
 
     <properties>
-        <spring.version>3.2.2.RELEASE</spring.version>
+        <spring.version>3.2.3.RELEASE</spring.version>
         <jackson.version>1.9.9</jackson.version>
-        <couchbase.version>1.1.4</couchbase.version>
+        <couchbase.version>1.1.8</couchbase.version>
         <mongodb.version>2.10.1</mongodb.version>
         <oracle.kv.version>1.2.123</oracle.kv.version>
         <artifact.version>0.1-SNAPSHOT</artifact.version>
@@ -155,6 +155,14 @@
             <version>2.1.0</version>
         </dependency>
 
+        <!-- cassandra -->
+
+        <dependency>
+           <groupId>com.datastax.cassandra</groupId>
+           <artifactId>cassandra-driver-core</artifactId>
+           <version>1.0.0</version>
+        </dependency>
+
         <dependency>
             <groupId>com.netflix.astyanax</groupId>
             <artifactId>astyanax</artifactId>
@@ -242,6 +250,18 @@
             <scope>system</scope>
             <systemPath>${basedir}/lib2/vtest.jar</systemPath>
         </dependency>
+
+        <!-- mongo report  -->
+
+        <dependency>
+            <groupId>com.amm.dom</groupId>
+            <artifactId>dom</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib2/axm-dom.jar</systemPath>
+        </dependency>
+
+        <!-- mongo report  -->
 
     </dependencies>
  
