@@ -33,19 +33,18 @@ keySize=20
 #valueSize=1000
 logModulo=50000
 
-opts="r:t:v:i:b:s:S:p:d:h:"
+opts="r:t:i:s:S:p:h:d:"
 while getopts $opts opt
   do
   case $opt in
     r) requests=$OPTARG ;;
     t) threadPoolSize=$OPTARG ;;
-#    v) valueSize=$OPTARG ;;
     i) iterations=$OPTARG ;;
     s) seedKey=$OPTARG ;;
     S) seedValue=$OPTARG ;;
-#    p) providerDir=$OPTARG
-#       PROPS="$PROPS -Dprovider=$providerDir"
-#       ;;
+    p) providerDir=$OPTARG
+       PROPS="$PROPS -Dprovider=$providerDir"
+       ;;
     d) tasksConfigFile=$OPTARG.xml 
        PROPS="$PROPS -DtasksConfigFile=$tasksConfigFile"
        ;;
@@ -67,7 +66,6 @@ cycleMax=$requests
 
 PROPS="$PROPS -Dcfg.requests=$requests"
 PROPS="$PROPS -Dcfg.threadPoolSize=$threadPoolSize"
-#PROPS="$PROPS -Dcfg.valueSize=$valueSize"
 PROPS="$PROPS -Dcfg.keyGenerator.size=$keySize"
 PROPS="$PROPS -Dcfg.key.seed=$seedKey"
 PROPS="$PROPS -Dcfg.value.seed=$seedValue"
