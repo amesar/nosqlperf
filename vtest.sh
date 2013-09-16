@@ -41,8 +41,7 @@ while getopts $opts opt
     i) iterations=$OPTARG ;;
     s) seedKey=$OPTARG ;;
     S) seedValue=$OPTARG ;;
-    p) provider=$OPTARG
-       CPATH="$CPATH:conf/$provider" ;;
+    p) provider=$OPTARG ;;
     d) tasksConfigFile=$OPTARG.xml 
        PROPS="$PROPS -DtasksConfigFile=$tasksConfigFile"
        ;;
@@ -51,6 +50,7 @@ while getopts $opts opt
         exit;;
     esac
   done
+CPATH="$CPATH:conf/$provider"
 
 shift `expr $OPTIND - 1`
 if [ $# -gt 0 ] ; then
