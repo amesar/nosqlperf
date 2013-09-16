@@ -5,6 +5,10 @@
 #
 # Examples:
 #   vtest.sh -r 100 -t 2 -i 5 get.task
+# Options:
+#   -r : number of requests
+#   -t : number of threads
+#   -i : number iterations of the tests
 #
 #*******************************************************
 
