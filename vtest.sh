@@ -9,6 +9,7 @@
 #   -r : number of requests
 #   -t : number of threads
 #   -i : number iterations of the tests
+#   -p : provider dir in conf/
 #
 #*******************************************************
 
@@ -27,10 +28,8 @@ threadPoolSize=1
 
 seedKey=1776
 seedValue=1776
-#seedValue=-1
 
 keySize=20
-#valueSize=1000
 logModulo=50000
 
 opts="r:t:i:s:S:p:h:d:"
@@ -42,9 +41,8 @@ while getopts $opts opt
     i) iterations=$OPTARG ;;
     s) seedKey=$OPTARG ;;
     S) seedValue=$OPTARG ;;
-    p) providerDir=$OPTARG
-       PROPS="$PROPS -Dprovider=$providerDir"
-       ;;
+    p) provider=$OPTARG
+       CPATH="$CPATH:conf/$provider" ;;
     d) tasksConfigFile=$OPTARG.xml 
        PROPS="$PROPS -DtasksConfigFile=$tasksConfigFile"
        ;;

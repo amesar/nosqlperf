@@ -32,7 +32,7 @@
 2) The default settings will run the hashmap provider. See vtest.sh for argument documentation.
 
     vtest.sh
-    vtest.sh -r 100 -t 2 -i 5 get.task
+    vtest.sh -r 100 -t 2 -i 5 -p cassandra get.task
 
 ## Sample report
 
@@ -41,21 +41,22 @@
     Get       5522.51  1448616    1.798       2       2       5       8      17     703    0     0
     Update     983.83  8131446   10.159       7      11      86     126     283    8680    0     0
 
-## Advanced Test Configuration
+## Configuration
 * Tests are written in Java
 * Configured and wired with Spring XML and set of externalized properties
 * Two things to configure:
   * The vtest tests you want to run 
-  * The provider-specific implementation of the key/value DAO that vtest tests call
+  * The provider-specific implementation of the KeyValueDao that vtest tests call
 
 ### Provider Configuration
+* See conf/
 * conf/appContext.xml imports provider-specific appContext-nosql.xml which is toggled by putting appropriate directory into classpath (common.env $provider)
-* Each provider has a directory in conf containing
-  * appContext-nosql.xml - impl
-  * appContext-nosql.properties for its
+* Each provider has a directory in conf containing:
+  * appContext-nosql.xml - implementation of KeyValueDao
+  * appContext-nosql.properties for above
 
 ### VTest Configuration
-* Found in conf/vtest/
+* See in conf/vtest/
 * Files:
   * vtest.xml - core vtest bean configuration. Root app context file for vtest framework
   * vtest.properties - externalized properties for above

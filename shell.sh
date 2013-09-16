@@ -9,9 +9,9 @@
 #*************************************************************************
 
 . ./common.env
+CPATH="$CPATH:conf/$provider"
 
 PGM=com.amm.nosql.cli.KeyValueShell
-
 
 if [ $# -gt 0 ] ; then
   hosts=$1
