@@ -1,38 +1,47 @@
 
-# Performance tests for key/value NoSQL stores.
+# Performance tests for key/value NoSQL stores
 
+Tool to execute performance tests for key/value NoSQL stores.
 
 ## Supported providers
-* cassandra - using both astyanax 1.56.34 and 1.1-3 hector client packages
-* citrusleaf
+* cassandra - Both astyanax 1.56.34 and 1.1-3 hector client packages
 * mongodb - Client driver 2.10.1
 * couchbase - Client driver 1.1.8
+* citrusleaf
 * hbase - 0.94.1
 * oracle - Oracle's NoSQL store - 1.2.123
 * redis - jedis client 2.1.0
-* memcached 
+* memcached - Uses standard spy.memcached client
 * hashmap - Dummy in-memory hashmap implementation
 * noop - Implementation does nothing at all
 
 ## Scripts
-  shell.sh - Shell to interactively manipulate items (put, get and delete)
-  vtest.sh - Invokes the performance test
+* vtest.sh - Invokes the performance test
+
+  Options:
+  *   -r : number of requests
+  *   -t : number of threads
+  *   -i : number iterations for the test
+  *   -p : provider dir in conf/
+  *   -h : comma-separated list of server hosts
+* shell.sh - Shell to interactively manipulate items (put, get and delete)
 
 ## Running 
 
-1) Make changes in common.env which contains common.env contains config settings for test
+1) First make changes in common.env which contains config settings for tests.
 
   Toggle two properties:
 
-    provider: NoSQL provider. Corresponds to the provider in conf/
+    provider: NoSQL provider. Corresponds to the provider in conf/ - see above list
     hosts: URLs for server - one or more comma-delimited server names
 
 2) Run vtest.sh and you well get a standard metrics report as shown in the sample below.
 
-2) The default settings will run the hashmap provider. See vtest.sh for argument documentation.
+3) The default settings will run the hashmap provider. See vtest.sh for argument documentation.
 
     vtest.sh
     vtest.sh -r 100 -t 2 -i 5 -p cassandra get.task
+    vtest.sh -r 100 -t 2 -i 5 -p mongodb put-get-update.job
 
 ## Sample report
 
@@ -45,15 +54,15 @@
 * Tests are written in Java
 * Configured and wired with Spring XML and set of externalized properties
 * Two things to configure:
-  * The vtest tests you want to run 
-  * The provider-specific implementation of the KeyValueDao that vtest tests call
+  * The vtest test (task/job) you want to run 
+  * The provider-specific implementation of the KeyValueDao 
 
 ### Provider Configuration
 * See conf/
 * conf/appContext.xml imports provider-specific appContext-nosql.xml which is toggled by putting appropriate directory into classpath (common.env $provider)
 * Each provider has a directory in conf containing:
   * appContext-nosql.xml - implementation of KeyValueDao
-  * appContext-nosql.properties for above
+  * appContext-nosql.properties for above (optional)
 
 ### VTest Configuration
 * See in conf/vtest/
@@ -62,4 +71,6 @@
   * vtest.properties - externalized properties for above
   * datagen.xml - Key and Value generator implementations
   * tasks-keyvalue.xml - Definitions of tasks (tests) to run
-
+* Definitions:
+  * task - a named test
+  * job - a collection of tasks
