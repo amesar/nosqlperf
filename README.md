@@ -22,22 +22,19 @@ Tool to execute performance tests for key/value NoSQL stores.
   *   -r : number of requests
   *   -t : number of threads
   *   -i : number iterations for the test
-  *   -p : provider dir in conf/
+  *   -p : provider per sub-directory in conf/
   *   -h : comma-separated list of server hosts
 * shell.sh - Shell to interactively manipulate items (put, get and delete)
 
 ## Running 
 
-1) First make changes in common.env which contains config settings for tests.
+* First make changes in common.env which contains config settings for tests.
 
   Toggle two properties:
+    * provider: NoSQL provider. Corresponds to the provider in conf/ - see above list
+    * hosts: URLs for server - one or more comma-delimited server names
 
-    provider: NoSQL provider. Corresponds to the provider in conf/ - see above list
-    hosts: URLs for server - one or more comma-delimited server names
-
-2) Run vtest.sh and you well get a standard metrics report as shown in the sample below.
-
-3) The default settings will run the hashmap provider. See vtest.sh for argument documentation.
+* Run vtest.sh which produces metrics report as shown in the sample report below.  The default provider is the hashmap provider. 
 
     vtest.sh
     vtest.sh -r 100 -t 2 -i 5 -p cassandra get.task
@@ -51,6 +48,7 @@ Tool to execute performance tests for key/value NoSQL stores.
     Update     983.83  8131446   10.159       7      11      86     126     283    8680    0     0
 
 ## Configuration
+### Overview
 * Tests are written in Java
 * Configured and wired with Spring XML and set of externalized properties
 * Two things to configure:
