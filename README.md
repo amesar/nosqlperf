@@ -1,7 +1,9 @@
 
-# Performance Framework for NoSQL key/value stores
+# Performance framework for NoSQL key/value stores
 
-Tool to execute performance tests for a variety on NoSQL key/value stores.
+Tool to execute performance tests for a variety of NoSQL key/value stores.
+
+The tool uses the [vtest](http://amesar.wordpress.com/2010/04/12/vtest-testing-framework/) testing framework.
 
 ## Supported NoSQL providers
 * cassandra - Both astyanax 1.56.34 and 1.1-3 hector client packages
@@ -35,11 +37,13 @@ Shell to interactively manipulate items (put, get and delete).
 
 ## Running 
 
+### vtest.sh
+
 * First make changes in common.env which contains config settings for tests.
 
   Toggle two properties:
     * provider: NoSQL provider. Corresponds to the provider in conf/ - see above list. In the example below, running with "-p mongodb" will use the Spring configuration file mongodb/appContext-provider.xml.
-    * hosts: URLs for server - one or more comma-delimited server names
+    * hosts: URLs for server - one or more comma-delimited server names. Default is localhost.
 
 * Run vtest.sh which produces metrics report as shown in the sample report below.  The default provider is the in-memory hashmap provider. 
 ```
@@ -48,9 +52,9 @@ Shell to interactively manipulate items (put, get and delete).
     vtest.sh -r 100 -t 10 -i 1 -p cassandra put-get-update.task
 ```
 
-## Sample reports
+### Sample reports
 
-### Simple put/get/update 
+#### Simple put/get/update 
 
 ```
     Test      Req/Sec    Total     Mean   50.0%   90.0%   99.0%   99.5%   99.9%     Max  Err  Fail
@@ -59,7 +63,7 @@ Shell to interactively manipulate items (put, get and delete).
     Update     983.83  8131446   10.159       7      11      86     126     283    8680    0     0
 ```
 
-### Cassandra - testing get/update cycle
+#### Cassandra - testing get/update cycle
 
 Testing how get-s operate after a series of updates. Notice the mean get starts at 5.8, drops to 17.5 after the first batch of updates,
 dropts to 11.9 and ends at 32.6.
@@ -89,6 +93,40 @@ PutOrGet   299.51  16693792   33.384       6      85     256     343     683  11
 Get3       306.77  16298600   32.594      20      74     207     229     363   14583    0     0
 ```
 
+### shell.sh
+
+```
++----- Key Value Shell -------------------------------------+
+|  ?               - Help                                   |
+|  get KEY         - get KEY                                |
+|  delete KEY      - delete KEY                             |
+|  put KEY VALUE   - put KEY VALUE                          |
+|  putf KEY FILE   - put KEY FILE contents                  |
+|  status          - status                                 |
+|  q               - Quit shell                             |
++-----------------------------------------------------------+
+Status:
+  keyValueDao.class: com.amm.nosql.dao.hashmap.HashMapKeyValueDao
+  keyValueDao:       cache.size=0 cache.class=java.util.Collections$SynchronizedMap
+  maxToDisplay:      100
+
+0>> put foo nosql_rocks
+put foo nosql_rocks
+
+0>> get foo
+get foo
+KeyValue:
+  key=foo
+  keySize=3 valueSize=11
+  value=nosql_rocks
+
+>> get bar
+get bar
+KeyValue: null
+
+```
+
+
 ## Configuration
 ### Overview
 * Tests are written in Java
@@ -99,7 +137,7 @@ Get3       306.77  16298600   32.594      20      74     207     229     363   1
 
 ### Provider Configuration
 * See conf/
-* conf/appContext.xml imports provider-specific appContext-nosql.xml which is toggled by putting appropriate the directory into the classpath (common.env $provider)
+* conf/appContext.xml imports provider-specific appContext-nosql.xml which is toggled by putting the appropriate directory in the classpath (common.env $provider)
 * Each provider has a directory in conf containing:
   * appContext-nosql.xml - implementation of KeyValueDao
   * appContext-nosql.properties for above (optional)
@@ -107,10 +145,10 @@ Get3       306.77  16298600   32.594      20      74     207     229     363   1
 ### VTest Configuration
 * See in conf/vtest/
 * Files:
-  * vtest.xml - core vtest bean configuration. Root app context file for vtest framework
-  * vtest.properties - externalized properties for above
-  * datagen.xml - Key and Value generator implementations
-  * tasks-keyvalue.xml - Definitions of tasks (tests) to run
+  * vtest.xml - core vtest bean configuration. Root application context file for vtest framework.
+  * vtest.properties - externalized properties for above.
+  * datagen.xml - Key and Value generator implementations.
+  * tasks-keyvalue.xml - Definitions of tasks (tests) to run.
 * Definitions:
-  * task - a named test
-  * job - a collection of tasks
+  * task - a named test.
+  * job - a collection of tasks.
