@@ -152,3 +152,9 @@ KeyValue: null
 * Definitions:
   * task - a named test.
   * job - a collection of tasks.
+
+## TODOS
+
+* Rewrite the shell using [jline](http://jline.sourceforge.net/).
+* Create a provider for the new official [Cassandra Java Driver](http://www.datastax.com/documentation/developer/java-driver/2.0/java-driver/whatsNew2.html).
+
