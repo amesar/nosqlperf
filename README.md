@@ -37,6 +37,8 @@ Shell to interactively manipulate items (put, get and delete).
 
 ## Running 
 
+First run: mvn install.
+
 ### vtest.sh
 
 * First make changes in common.env which contains config settings for tests.
