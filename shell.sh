@@ -18,8 +18,8 @@ if [ $# -gt 0 ] ; then
   shift `expr $OPTIND - 1`
   fi
 
-echo ">> hosts=$hosts"
-echo ">> PROPS=$PROPS"
+echo "HOSTS: $hosts"
+#echo ">> PROPS=$PROPS"
 
 java $PROPS -cp $CPATH $PGM $* | tee log-shell.txt
 
