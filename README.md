@@ -28,10 +28,10 @@ Each provider is located in its own module.
 
 ## Building and Installing
 
-The project is implemented as multi-module maven project.
+The project is implemented as a multi-module maven project.
 
 The core module contains common shared logic.
-Other modules corresponds to provider implementations.
+Other modules correspond to provider implementations.
 
 To build the project:
 ```
@@ -47,9 +47,20 @@ mongodb/target/mongodb-distribution.tar.gz
 hashmap/target/hashmap-distribution.tar.gz
 ```
 
-## Scripts
+## Running 
 
-### vtest.sh 
+### common.env
+
+common.env contains settings shared between all scripts. You can either change this file or use script options to override
+the default values.
+
+Key properties to toggle per environment:
+
+* provider: NoSQL provider. Corresponds to the provider module. In the example below, running with "-p mongodb" will use the Spring configuration file mongodb/conf/appContext-provider.xml.
+* hosts: URLs for server - one or more comma-delimited server names. Default is localhost.
+
+
+### vtest.sh
 
 Invokes the performance test tool.
 
@@ -61,35 +72,18 @@ Options:
   *   -p : provider (module name)
   *   -h : comma-separated list of server hosts
 
-### shell.sh 
+Instructions
 
-Shell to interactively manipulate items (put, get and delete).
-
-Options:
-
-  *   -p : provider (module name)
-  *   -h : comma-separated list of server hosts
-
-## Running 
-
-### vtest.sh
-
-* First make changes in common.env which contains config settings for tests.
-
-  Toggle two properties:
-    * provider: NoSQL provider. Corresponds to the provider module. In the example below, running with "-p mongodb" will use the Spring configuration file mongodb/conf/appContext-provider.xml.
-    * hosts: URLs for server - one or more comma-delimited server names. Default is localhost.
-
-* Run vtest.sh which produces metrics report as shown in the sample report below.  The default provider is the in-memory hashmap provider. 
+* vtest.sh produces metrics report as shown in the sample report below.  The default provider is the in-memory hashmap provider. 
 ```
     vtest.sh
     vtest.sh -r 100 -t 2 -i 5 -p mongodb put-get-update.job
     vtest.sh -r 100 -t 10 -i 1 -p cassandra put-get-update.task
 ```
 
-### Sample reports
+#### Sample reports
 
-#### Simple put/get/update 
+##### Simple put/get/update 
 
 ```
     Test      Req/Sec    Total     Mean   50.0%   90.0%   99.0%   99.5%   99.9%     Max  Err  Fail
@@ -98,7 +92,7 @@ Options:
     Update     983.83  8131446   10.159       7      11      86     126     283    8680    0     0
 ```
 
-#### Cassandra - testing get/update cycle
+##### Cassandra - advanced get/update cycle
 
 Testing how get-s operate after a series of updates. Notice the mean get starts at 5.8, drops to 17.5 after the first batch of updates,
 dropts to 11.9 and ends at 32.6.
@@ -130,6 +124,15 @@ Get3       306.77  16298600   32.594      20      74     207     229     363   1
 
 ### shell.sh
 
+Invokes a simple shell to interactively manipulate items (put, get and delete).
+
+Options:
+
+  *   -p : provider (module name)
+  *   -h : comma-separated list of server hosts
+
+
+Sample session:
 ```
 +----- Key Value Shell -------------------------------------+
 |  ?               - Help                                   |
@@ -145,10 +148,10 @@ Status:
   keyValueDao:       cache.size=0 cache.class=java.util.Collections$SynchronizedMap
   maxToDisplay:      100
 
-0>> put foo nosql_rocks
+>> put foo nosql_rocks
 put foo nosql_rocks
 
-0>> get foo
+>> get foo
 get foo
 KeyValue:
   key=foo
@@ -193,7 +196,7 @@ For example, here's what the MongoDB configuration looks like:
   * task - a named test.
   * job - a collection of tasks.
 
-## Providers
+## Provider Shell Samples
 
 ### MongoDB 
 
@@ -216,6 +219,37 @@ Inside the mongo shell:
 { "_id" : "NXcJUSxWhjZtEFqSRQXF", "value" : BinData(0,"emFXQ0xq...eHdCUg==") }
 { "_id" : "gylYclzdQyopewDZjlIv", "value" : BinData(0,"bE5tRGFF...eEVEcXo=") }
 
+```
+
+### Cassandra
+
+From the cqlsh.sh.
+
+```
+select key from kv limit 10;
+
+ key
+----------------------
+ CpGsMGSGkSEmeaXzloif
+ XxIqEnhhVWwUmJLakMii
+ ZToBrfOOiAPECQHcpolF
+ QFHBmqlMiWgaeCQPlewK
+ eodunAkGSUJxlKjODkUS
+ pBgHeFhyWVycwNHtouaX
+ eSgAthydojUUZFISErmH
+ sHWShKFWYEHRLrrCfuve
+ OhoxERPoeKMMOGjGjqNw
+ LPDfDHKekRZVJKUvtMuO
+```
+
+select key,value from kv limit 3;
+```
+ key                  | value
+----------------------+-------------------------------------------
+
+ CpGsMGSGkSEmeaXzloif | 0x715a4a746c4a725773594d7777416a4255657061
+ XxIqEnhhVWwUmJLakMii | 0x554b6c68767046424b594f6f79706649616e434a
+ ZToBrfOOiAPECQHcpolF | 0x42596d4b6c45576c4a55616d767563637879416e
 ```
 
 ## TODOS
