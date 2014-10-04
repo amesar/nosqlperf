@@ -8,18 +8,44 @@ The tool uses the [vtest](http://amesar.wordpress.com/2010/04/12/vtest-testing-f
 Note that most of this work was done between 2011 and 2013.
 
 ## Supported NoSQL providers
+
+Each provider is located in its own module.
+
 * cassandra:
-	* Netflix's astyanax 1.56.34 
-	* Hector 1.1-3 
-* mongodb - Client driver 2.10.1
+	* cassandra-datastax - Datastax Cassandra driver 2.1.1
+	* cassandra-astyanax - Netflix's astyanax 1.56.34 
+	* cassandra-hector - Hector 1.1-3 
+* mongodb - Client driver 2.11.4
 * couchbase - Client driver 1.1.8
-* citrusleaf/aerospike - Aug. 2012
-* hbase - 0.94.1
-* oracle - Oracle's NoSQL store - 1.2.123
+* aerospike - 3.0.29 - (Aug. 2012 server)
+* hbase - 0.99.0
+* oracle-nosql - Oracle's NoSQL store - kvclient_3.0.5
 * redis - jedis client 2.1.0
-* memcached - Uses standard spy.memcached client
+* memcached - spymemcached 2.11.4 
 * hashmap - Dummy in-memory hashmap implementation
 * noop - Implementation does nothing at all
+
+
+## Building and Installing
+
+The project is implemented as multi-module maven project.
+
+The core module contains common shared logic.
+Other modules corresponds to provider implementations.
+
+To build the project:
+```
+mvn clean install
+```
+
+Each module also has distribution tarball containing all jars and files needed to run the module without maven.
+For example:
+```
+core/target/nosqlperf-distribution.tar.gz
+cassandra-datastax/target/cassandra-datastax-distribution.tar.gz
+mongodb/target/mongodb-distribution.tar.gz
+hashmap/target/hashmap-distribution.tar.gz
+```
 
 ## Scripts
 
@@ -32,23 +58,26 @@ Options:
   *   -r : number of requests
   *   -t : number of threads
   *   -i : number iterations for the test
-  *   -p : provider per sub-directory in conf/
+  *   -p : provider (module name)
   *   -h : comma-separated list of server hosts
 
 ### shell.sh 
 
 Shell to interactively manipulate items (put, get and delete).
 
-## Running 
+Options:
 
-First run: mvn install.
+  *   -p : provider (module name)
+  *   -h : comma-separated list of server hosts
+
+## Running 
 
 ### vtest.sh
 
 * First make changes in common.env which contains config settings for tests.
 
   Toggle two properties:
-    * provider: NoSQL provider. Corresponds to the provider in conf/ - see above list. In the example below, running with "-p mongodb" will use the Spring configuration file mongodb/appContext-provider.xml.
+    * provider: NoSQL provider. Corresponds to the provider module. In the example below, running with "-p mongodb" will use the Spring configuration file mongodb/conf/appContext-provider.xml.
     * hosts: URLs for server - one or more comma-delimited server names. Default is localhost.
 
 * Run vtest.sh which produces metrics report as shown in the sample report below.  The default provider is the in-memory hashmap provider. 
@@ -141,25 +170,25 @@ KeyValue: null
   * The provider implementation of the KeyValueDao (e.g. mongo, cassandra).
 
 ### Provider Configuration
-* The directory [conf](conf) and its subdirectories contain all configuration.
+* The directory [core/conf](core/conf) contains configuration for the core module.
   * appContext.xml is the root Spring configuration file. It import appContext-nosql.xml.
   * appContext-nosql.xml - imports appContext-provider.xml which is determined by the appropriate provider directory in the classpath.
 
-* Each provider has a directory in conf containing:
+* Each provider module also has a conf directory containing:
   * appContext-provider.xml - provider-specific configuration of KeyValueDao
   * provider.properties 
 
 For example, here's what the MongoDB configuration looks like:
 
-  * [conf/mongodb/appContext-provider.xml](conf/mongodb/appContext-provider.xml)
-  * [conf/mongodb/provider.properties](conf/mongodb/provider.properties)
+  * [mongodb/conf/appContext-provider.xml](mongodb/conf/appContext-provider.xml)
+  * [mongodb/conf/provider.properties](mongodb/conf/provider.properties)
 
 ### VTest Configuration
-* [conf/vtest](conf/vtest):
-  * [vtest.xml](conf/vtest/vtest.xml) - core vtest bean configuration. Root application context file for vtest framework.
-  * [vtest.properties](conf/vtest/vtest.properties) - externalized properties for above.
-  * [datagen.xml](conf/vtest/datagen.xml) - Key and Value generator implementations.
-  * [tasks-keyvalue.xml](conf/vtest/tasks-keyvalue.xml) - Definitions of tasks (tests) to run.
+* [core/conf/vtest](core/conf/vtest):
+  * [vtest.xml](core/conf/vtest/vtest.xml) - core vtest bean configuration. Root application context file for vtest framework.
+  * [vtest.properties](core/conf/vtest/vtest.properties) - externalized properties for above.
+  * [datagen.xml](core/conf/vtest/datagen.xml) - Key and Value generator implementations.
+  * [tasks-keyvalue.xml](core/conf/vtest/tasks-keyvalue.xml) - Definitions of tasks (tests) to run.
 * Definitions:
   * task - a named test.
   * job - a collection of tasks.
@@ -168,7 +197,7 @@ For example, here's what the MongoDB configuration looks like:
 
 ### MongoDB 
 
-The database and collection are defined in properties found in [conf/mongodb/provider.properties](conf/mongodb/provider.properties).
+The database and collection are defined in properties found in [mongodb/conf/provider.properties](mongodb/conf/provider.properties).
 ```
   mongodb.database=nosql
   mongodb.collection.keyValue=kv
