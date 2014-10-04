@@ -23,6 +23,7 @@
         <module>memcached</module>
         <module>mongodb</module>
         <module>redis</module>
+        <module>couchbase</module>
     </modules>
 
     <build>
