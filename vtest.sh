@@ -50,7 +50,9 @@ while getopts $opts opt
         exit;;
     esac
   done
-CPATH="$CPATH:conf/$provider"
+
+#CPATH="$CPATH:conf/$provider"
+addProviderToClasspath $provider
 
 shift `expr $OPTIND - 1`
 if [ $# -gt 0 ] ; then
@@ -85,7 +87,7 @@ echo "provider=$provider" >> log.txt
 echo "LOGDIR=$logdir" >> log.txt
 echo "LOGDIR=$logdir"
 echo "PROPS=$PROPS"
-echo "provider=$provider"
+echo "PROVIDER=$provider"
 echo "tasksConfigFile=$tasksConfigFile"
 
 cp -p log.txt $logdir
