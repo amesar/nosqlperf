@@ -21,6 +21,7 @@
     <modules>
         <module>core</module>
         <module>memcached</module>
+        <module>mongodb</module>
     </modules>
 
     <build>
