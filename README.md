@@ -10,7 +10,7 @@ Note that most of this work was done between 2011 and 2013.
 ## Supported NoSQL providers
 * cassandra:
 	* Netflix's astyanax 1.56.34 
-	* 1.1-3 hector 
+	* Hector 1.1-3 
 * mongodb - Client driver 2.10.1
 * couchbase - Client driver 1.1.8
 * citrusleaf/aerospike - Aug. 2012
