@@ -21,6 +21,7 @@ Each provider is located in its own module.
 * hbase - 0.99.0
 * oracle-nosql - Oracle's NoSQL store - kvclient_3.0.5
 * redis - jedis client 2.1.0
+* riak - riak-client 1.1.4 (Oct. 2012)
 * memcached - spymemcached 2.11.4 
 * hashmap - Dummy in-memory hashmap implementation
 * noop - Implementation does nothing at all
