@@ -3,10 +3,10 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.amm</groupId>
-    <artifactId>nosqlperf-cassandra-cassanra</artifactId>
+    <artifactId>nosqlperf-cassandra</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>nosqlperf-cassandra-cassanra</name>
+    <name>nosqlperf-cassandra</name>
 
     <parent>
         <groupId>com.amm</groupId>
@@ -42,7 +42,7 @@
               <artifactId>maven-assembly-plugin</artifactId>
               <configuration>
                 <descriptor>src/assembly/distribution.xml</descriptor>
-                <finalName>cassandra-cassandra</finalName>
+                <finalName>cassandra</finalName>
               </configuration>
               <executions>
                 <execution>

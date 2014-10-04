@@ -22,7 +22,7 @@
         <module>core</module>
         <module>memcached</module>
         <module>mongodb</module>
-        <module>cassandra-cassandra</module>
+        <module>cassandra</module>
         <module>cassandra-astyanax</module>
         <module>cassandra-hector</module>
         <module>redis</module>
