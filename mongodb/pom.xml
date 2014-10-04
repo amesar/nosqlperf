@@ -15,7 +15,10 @@
     </parent>
 
     <properties>
-        <mongodb.version>2.10.1</mongodb.version>
+        <mongodb.version>2.11.4</mongodb.version>
+<!-- Hangs with mongodb-osx-x86_64-2.6.4
+        <mongodb.version>2.12.3</mongodb.version>
+-->
     </properties>
 
     <dependencies>
