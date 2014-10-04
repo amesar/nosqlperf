@@ -24,6 +24,7 @@
         <module>mongodb</module>
         <module>redis</module>
         <module>couchbase</module>
+        <module>aerospike</module>
     </modules>
 
     <build>
