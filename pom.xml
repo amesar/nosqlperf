@@ -31,6 +31,7 @@
         <module>oracle-nosql</module>
         <module>hbase</module>
         <module>hashmap</module>
+        <module>noop</module>
     </modules>
 
     <build>
