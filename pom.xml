@@ -29,6 +29,7 @@
         <module>aerospike</module>
         <module>oracle-nosql</module>
         <module>hbase</module>
+        <module>hashmap</module>
     </modules>
 
     <build>
