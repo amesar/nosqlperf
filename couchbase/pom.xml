@@ -1,0 +1,38 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.amm</groupId>
+    <artifactId>nosqlperf-couchbase</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>nosqlperf-couchbase</name>
+
+    <parent>
+        <groupId>com.amm</groupId>
+        <artifactId>nosqlperf</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <properties>
+        <couchbase.version>1.2.0</couchbase.version>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+	        <groupId>com.couchbase.client</groupId>
+	        <artifactId>couchbase-client</artifactId>
+            <version>${couchbase.version}</version>
+        </dependency>
+
+        <dependency>
+            <type>jar</type>
+            <groupId>com.amm</groupId>
+            <artifactId>nosqlperf-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+    </dependencies>
+
+</project>
