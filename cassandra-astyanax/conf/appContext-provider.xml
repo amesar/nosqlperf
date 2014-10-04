@@ -8,8 +8,8 @@
 
   <bean id="keyValueDao" class="com.amm.nosql.dao.cassandra.astyanax.AstyanaxKeyValueDao" >
     <constructor-arg value="${cassandra.cluster}"/>
-    <constructor-arg value="${cassandra.keyspace.keyValue}"/>
-    <constructor-arg value="KeyValue2" />
+    <constructor-arg value="${cassandra.keyspace}"/>
+    <constructor-arg value="${cassandra.columnFamily}" />
     <constructor-arg value="${astyanax.seedUrl}"/>
     <constructor-arg value="${astyanax.port}"/>
     <constructor-arg ref="keyValueMapper" />
