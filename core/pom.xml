@@ -107,7 +107,7 @@
             <artifactId>vtest</artifactId>
             <version>1.0.0</version>
             <scope>system</scope>
-            <systemPath>${basedir}/../lib2/vtest.jar</systemPath>
+            <systemPath>${basedir}/lib2/vtest.jar</systemPath>
         </dependency>
 
     </dependencies>
