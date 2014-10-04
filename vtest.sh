@@ -50,11 +50,11 @@ while getopts $opts opt
         exit;;
     esac
   done
+shift `expr $OPTIND - 1`
 
 #CPATH="$CPATH:conf/$provider"
 addProviderToClasspath $provider
 
-shift `expr $OPTIND - 1`
 if [ $# -gt 0 ] ; then
   job=$1
   fi

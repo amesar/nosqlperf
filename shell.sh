@@ -13,11 +13,22 @@ CPATH="$CPATH:conf/$provider"
 
 PGM=com.amm.nosql.cli.KeyValueShell
 
-if [ $# -gt 0 ] ; then
-  hosts=$1
-  shift `expr $OPTIND - 1`
-  fi
+opts="h:p:"
+while getopts $opts opt
+  do
+  case $opt in
+    p) provider=$OPTARG ;;
+    h) hosts=$OPTARG ;;
+    \?) echo $USAGE " Error"
+        exit;;
+    esac
+  done
+shift `expr $OPTIND - 1`
 
+#CPATH="$CPATH:conf/$provider"
+addProviderToClasspath $provider
+
+echo "PROVIDER: $provider"
 echo "HOSTS: $hosts"
 #echo ">> PROPS=$PROPS"
 
