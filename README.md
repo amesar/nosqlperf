@@ -5,8 +5,12 @@ Tool to execute performance tests for a variety of NoSQL key/value stores.
 
 The tool uses the [vtest](http://amesar.wordpress.com/2010/04/12/vtest-testing-framework/) testing framework.
 
+Note that most of this work was done between 2011 and 2013.
+
 ## Supported NoSQL providers
-* cassandra - Both astyanax 1.56.34 and 1.1-3 hector client packages
+* cassandra:
+	* Netflix's astyanax 1.56.34 
+	* 1.1-3 hector 
 * mongodb - Client driver 2.10.1
 * couchbase - Client driver 1.1.8
 * citrusleaf/aerospike - Aug. 2012
@@ -128,32 +132,62 @@ KeyValue: null
 
 ```
 
-
 ## Configuration
 ### Overview
-* Tests are written in Java
-* Configured and wired with Spring XML and set of externalized properties
+* Tests are written in Java.
+* Configured and wired with Spring XML and set of externalized properties.
 * Two things to configure:
-  * The vtest test (task/job) you want to run 
-  * The provider-specific implementation of the KeyValueDao 
+  * The vtest test task you want to run.
+  * The provider implementation of the KeyValueDao (e.g. mongo, cassandra).
 
 ### Provider Configuration
-* See conf/
-* conf/appContext.xml imports provider-specific appContext-nosql.xml which is toggled by putting the appropriate directory in the classpath (common.env $provider)
+* The directory [conf](conf) and its subdirectories contain all configuration.
+  * appContext.xml is the root Spring configuration file. It import appContext-nosql.xml.
+  * appContext-nosql.xml - imports appContext-provider.xml which is determined by the appropriate provider directory in the classpath.
+
 * Each provider has a directory in conf containing:
-  * appContext-nosql.xml - implementation of KeyValueDao
-  * appContext-nosql.properties for above (optional)
+  * appContext-provider.xml - provider-specific configuration of KeyValueDao
+  * provider.properties 
+
+For example, here's what the MongoDB configuration looks like:
+
+  * [conf/mongodb/appContext-provider.xml](conf/mongodb/appContext-provider.xml)
+  * [conf/mongodb/provider.properties](conf/mongodb/provider.properties)
 
 ### VTest Configuration
-* See in conf/vtest/
-* Files:
-  * vtest.xml - core vtest bean configuration. Root application context file for vtest framework.
-  * vtest.properties - externalized properties for above.
-  * datagen.xml - Key and Value generator implementations.
-  * tasks-keyvalue.xml - Definitions of tasks (tests) to run.
+* [conf/vtest](conf/vtest):
+  * [vtest.xml](conf/vtest/vtest.xml) - core vtest bean configuration. Root application context file for vtest framework.
+  * [vtest.properties](conf/vtest/vtest.properties) - externalized properties for above.
+  * [datagen.xml](conf/vtest/datagen.xml) - Key and Value generator implementations.
+  * [tasks-keyvalue.xml](conf/vtest/tasks-keyvalue.xml) - Definitions of tasks (tests) to run.
 * Definitions:
   * task - a named test.
   * job - a collection of tasks.
+
+## Providers
+
+### MongoDB 
+
+The database and collection are defined in properties found in [conf/mongodb/provider.properties](conf/mongodb/provider.properties).
+```
+  mongodb.database=nosql
+  mongodb.collection.keyValue=kv
+```
+
+You do not have to manually create the the database and collection since the MongoDB driver will automatically create them when you run code to insert new items.
+
+Inside the mongo shell:
+```
+> use nosql;
+
+> db.kv.count();
+1000000
+
+> db.kv.find().limit(2);
+{ "_id" : "NXcJUSxWhjZtEFqSRQXF", "value" : BinData(0,"emFXQ0xq...eHdCUg==") }
+{ "_id" : "gylYclzdQyopewDZjlIv", "value" : BinData(0,"bE5tRGFF...eEVEcXo=") }
+
+```
 
 ## TODOS
 
