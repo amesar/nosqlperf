@@ -30,6 +30,7 @@
         <module>aerospike</module>
         <module>oracle-nosql</module>
         <module>hbase</module>
+        <module>ehcache</module>
         <module>hashmap</module>
         <module>noop</module>
     </modules>
