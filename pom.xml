@@ -25,6 +25,7 @@
         <module>redis</module>
         <module>couchbase</module>
         <module>aerospike</module>
+        <module>oracle-nosql</module>
     </modules>
 
     <build>
