@@ -33,8 +33,6 @@
            <version>2.4</version>
 -->
         </dependency>
-<!--
--->
        <dependency>
 	      <groupId>commons-httpclient</groupId>
 	      <artifactId>commons-httpclient</artifactId>

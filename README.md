@@ -23,6 +23,7 @@ Each provider is located in its own module.
 * redis - jedis client 2.1.0
 * riak - riak-client 1.1.4 (Oct. 2012)
 * memcached - spymemcached 2.11.4 
+* ehcache - echache REST - 2.8.4
 * hashmap - Dummy in-memory hashmap implementation
 * noop - Implementation does nothing at all
 
