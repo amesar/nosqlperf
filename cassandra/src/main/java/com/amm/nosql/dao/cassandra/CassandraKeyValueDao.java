@@ -1,4 +1,4 @@
-package com.amm.nosql.dao.cassandra.cassandra;
+package com.amm.nosql.dao.cassandra;
 
 import com.amm.nosql.dao.KeyValueDao;
 import com.amm.nosql.data.KeyValue;
